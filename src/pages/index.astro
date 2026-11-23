@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import genres from '../data/genres.json';
+const list = Object.entries(genres);
+---
+<Base title="ギアクラブ" description="ガジェット・オーディオをスペックで比べるサイト">
+  <h1>ガジェット・オーディオを、スペックで比べる</h1>
+  <p class="lead">ジャンルを選ぶと、ランキングと比較表が見られます。</p>
+  <ul class="list">
+    {list.map(([slug, g]) => (
+      <li class="item">
+        <span class="rank">&#9654;</span>
+        <div>
+          <div class="name"><a href={`/${slug}/`}>{g.name}</a></div>
+          <div class="meta">{g.description}</div>
+        </div>
+        <a class="btn" href={`/${slug}/`}>ランキングを見る</a>
+      </li>
+    ))}
+  </ul>
+</Base>

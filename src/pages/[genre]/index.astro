@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import genres from '../../data/genres.json';
+
+export function getStaticPaths() {
+  return Object.entries(genres).map(([slug, g]) => ({ params: { genre: slug }, props: { g } }));
+}
+
+const { g } = Astro.props;
+const { genre } = Astro.params;
+const ranked = [...g.products].sort((a, b) => b.score - a.score);
+---
+<Base title={`${g.name}ランキング`} description={g.description}>
+  <nav class="tabs" aria-label="表示の切り替え">
+    <a href={`/${genre}/`} aria-current="page">ランキング</a>
+    <a href={`/${genre}/compare/`}>比較表</a>
+  </nav>
+  <h1>{g.name}ランキング</h1>
+  <p class="lead">{g.description}</p>
+  <ol class="list">
+    {ranked.map((p, i) => (
+      <li class="item">
+        <span class="rank">{i + 1}</span>
+        <div>
+          <div class="name">{p.name}</div>
+          <div class="meta">評価 {p.score} / 価格 {p.price.toLocaleString('ja-JP')}円</div>
+        </div>
+        <a class="btn" href={p.url} rel="sponsored nofollow noopener">商品ページへ</a>
+      </li>
+    ))}
+  </ol>
+</Base>

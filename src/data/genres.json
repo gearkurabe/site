@@ -1,0 +1,17 @@
+{
+  "bone-conduction": {
+    "name": "骨伝導イヤホン",
+    "description": "耳をふさがず使える骨伝導イヤホンを、スペックで比べます。",
+    "specs": [
+      { "key": "price", "label": "価格", "unit": "円" },
+      { "key": "battery", "label": "連続再生", "unit": "時間" },
+      { "key": "weight", "label": "重さ", "unit": "g" },
+      { "key": "waterproof", "label": "防水等級", "unit": "" }
+    ],
+    "products": [
+      { "id": "sample-a", "name": "サンプル商品A(ダミー)", "score": 4.5, "url": "#", "price": 12000, "battery": 8, "weight": 30, "waterproof": "IP55" },
+      { "id": "sample-b", "name": "サンプル商品B(ダミー)", "score": 4.2, "url": "#", "price": 9000, "battery": 6, "weight": 28, "waterproof": "IP44" },
+      { "id": "sample-c", "name": "サンプル商品C(ダミー)", "score": 3.9, "url": "#", "price": 15000, "battery": 10, "weight": 35, "waterproof": "IP67" }
+    ]
+  }
+}
