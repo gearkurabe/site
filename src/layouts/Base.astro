@@ -10,7 +10,7 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
     <meta name="robots" content="noindex" />
     <title>{full}</title>
     <meta name="description" content={description} />
-    <style>
+    <style is:global>
       :root {
         --bg: #f7f8f8; --surface: #ffffff; --text: #1c2326; --muted: #5d6a6f;
         --line: #d9dfe1; --accent: #0f6b63; --accent-bg: #e4f1ef;
