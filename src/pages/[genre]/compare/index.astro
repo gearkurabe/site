@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/Hero.astro';
 import genres from '../../../data/genres.json';
 
 export function getStaticPaths() {
@@ -9,22 +10,34 @@ export function getStaticPaths() {
 const { g } = Astro.props;
 const { genre } = Astro.params;
 
-// 確認済み(verified: true)の値だけを表示し、それ以外は「確認中」にする
+const num = (v) => parseFloat(String(v).replace(/[^0-9.]/g, ''));
+// 数値で比べられる項目だけ、いちばん良い値に印をつける(連続再生は長い方、重さは軽い方)
+const better = { battery: 'max', weight: 'min' };
+const best = {};
+for (const s of g.specs) {
+  const mode = better[s.key];
+  if (!mode) continue;
+  const vals = g.products
+    .map((p) => p.specs && p.specs[s.key])
+    .filter((v) => v && v.verified === true)
+    .map((v) => num(v.value))
+    .filter((x) => !Number.isNaN(x));
+  if (vals.length) best[s.key] = mode === 'max' ? Math.max(...vals) : Math.min(...vals);
+}
+
 const specCell = (p, s) => {
   const v = p.specs && p.specs[s.key];
-  return v && v.verified === true
-    ? { text: `${v.value}${s.unit}`, ok: true }
-    : { text: '確認中', ok: false };
+  if (!(v && v.verified === true)) return { text: '確認中', ok: false, best: false };
+  return { text: `${v.value}${s.unit}`, ok: true, best: best[s.key] !== undefined && num(v.value) === best[s.key] };
 };
 ---
 <Base title={`${g.name}の比較表`} description={g.description}>
+  <Hero slot="hero" eyebrow="COMPARE" title={`${g.name}の比較表`} lead="確認済みのスペックを、横に並べて比べられます。" />
   <nav class="tabs" aria-label="表示の切り替え">
-    <a href={`/${genre}/`}>ランキング</a>
+    <a href={`/${genre}/`}>おすすめ</a>
     <a href={`/${genre}/compare/`} aria-current="page">比較表</a>
   </nav>
-  <h1>{g.name}の比較表</h1>
-  <p class="lead">スペックを横に並べて比べられます。</p>
-  <p class="note">スペックは、メーカー公式または販売元の情報で確認できた値だけを掲載しています。確認できていない項目は「確認中」と表示します。価格は参考価格で、変動します。最新の価格は、販売ページでご確認ください。</p>
+  <p class="note">スペックは、メーカー公式または販売元の情報で確認できた値だけを掲載しています。確認できていない項目は「確認中」と表示します。「◎」は、掲載している商品の中でいちばん良い値です。価格は参考価格で、変動します。</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -45,7 +58,7 @@ const specCell = (p, s) => {
             </td>
             {g.specs.map((s) => {
               const c = specCell(p, s);
-              return <td class:list={[!c.ok && 'pending']}>{c.text}</td>;
+              return <td class:list={[!c.ok && 'pending', c.best && 'best']}>{c.text}{c.best && ' ◎'}</td>;
             })}
           </tr>
         ))}

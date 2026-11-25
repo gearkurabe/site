@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import ProductCard from '../../components/ProductCard.astro';
 import genres from '../../data/genres.json';
 
 export function getStaticPaths() {
@@ -8,50 +10,17 @@ export function getStaticPaths() {
 
 const { g } = Astro.props;
 const { genre } = Astro.params;
-const spec = g.specs.find((s) => s.key === g.ranking.key);
 const hasAd = g.products.some((p) => p.link && p.link.ad);
-
-// 順位づけに使う値は「確認済み」のものだけ。確認中の商品は末尾に並べる
-const valueOf = (p) => {
-  const v = p.specs && p.specs[g.ranking.key];
-  return v && v.verified === true && typeof v.value === 'number' ? v.value : null;
-};
-const sign = g.ranking.order === 'asc' ? 1 : -1;
-const sorted = [...g.products].sort((a, b) => {
-  const va = valueOf(a), vb = valueOf(b);
-  if (va === null && vb === null) return 0;
-  if (va === null) return 1;
-  if (vb === null) return -1;
-  return (va - vb) * sign;
-});
-let rank = 0;
-const rows = sorted.map((p) => {
-  const v = valueOf(p);
-  return { p, v, rank: v === null ? null : ++rank };
-});
 ---
-<Base title={`${g.name}ランキング`} description={g.description}>
+<Base title={g.headline} description={g.description}>
+  <Hero slot="hero" eyebrow={g.name.toUpperCase() === g.name ? g.name : '骨伝導イヤホン'} title={g.headline} lead={g.description} />
   <nav class="tabs" aria-label="表示の切り替え">
-    <a href={`/${genre}/`} aria-current="page">ランキング</a>
+    <a href={`/${genre}/`} aria-current="page">おすすめ</a>
     <a href={`/${genre}/compare/`}>比較表</a>
   </nav>
-  <h1>{g.name}ランキング</h1>
-  <p class="lead">{g.description}</p>
-  <p class="note">{hasAd && 'このページには広告(アフィリエイトリンク)が含まれます。'}順位は「{g.ranking.label}」で並べています。報酬の有無や大小は、順位に関係ありません。スペックを確認できていない商品は、末尾に表示します。</p>
-  <ol class="list">
-    {rows.map(({ p, v, rank }) => (
-      <li class="item">
-        <span class="rank">{rank ?? '-'}</span>
-        <div>
-          <div class="name">{p.name}</div>
-          <div class="meta">
-            {spec.label} {v === null ? '確認中' : `${v}${spec.unit}`}
-            {p.referencePrice && ` / 参考価格 ${p.referencePrice.amount.toLocaleString('ja-JP')}円(${p.referencePrice.checkedAt}時点・${p.referencePrice.source})`}
-          </div>
-        </div>
-        <a class="btn" href={p.link.url} rel={p.link.ad ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{p.link.label}{p.link.ad && '(広告)'}</a>
-      </li>
-    ))}
+  <p class="note">{hasAd && 'このページには広告(アフィリエイトリンク)が含まれます。'}タイプの違いで{g.products.length}つを選びました。順番は優劣ではありません。「こんな人に」とデザインの感想は運営者の見立てで、スペックは確認した値です。</p>
+  <ol class="cards">
+    {g.products.map((p, i) => <ProductCard p={p} n={i + 1} specs={g.specs} />)}
   </ol>
-  <p class="meta">価格は変動します。最新の価格・在庫は、販売ページでご確認ください。</p>
+  <p class="meta" style="margin-top:20px">価格は変動します。最新の価格・在庫は、販売ページでご確認ください。スペックの出典と確認日は、<a href={`/${genre}/compare/`}>比較表</a>のページに載せています。</p>
 </Base>

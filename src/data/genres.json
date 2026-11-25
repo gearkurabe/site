@@ -1,8 +1,8 @@
 {
   "bone-conduction": {
     "name": "骨伝導イヤホン",
-    "description": "耳をふさがず使える骨伝導イヤホンを、スペックで比べます。まずは1万円前後で手に取りやすいモデルから。",
-    "ranking": { "key": "battery", "order": "desc", "label": "連続再生時間が長い順" },
+    "headline": "初めての骨伝導イヤホン おすすめ3選",
+    "description": "耳をふさがず使える骨伝導イヤホンを、確認済みのスペックで比べます。まずは1万円台前半から手に取りやすいモデルを。",
     "specs": [
       { "key": "battery", "label": "連続再生", "unit": "時間" },
       { "key": "weight", "label": "重さ", "unit": "g" },
@@ -10,24 +10,11 @@
     ],
     "products": [
       {
-        "id": "shokz-openmove",
-        "name": "Shokz OpenMove",
-        "maker": "Shokz",
-        "model": "OpenMove",
-        "link": { "url": "https://jp.shokz.com/products/bone-conduction-headphone-openmove", "label": "公式ページで見る", "ad": false },
-        "referencePrice": { "amount": 11880, "checkedAt": "2026-11-25", "source": "Shokz公式サイト" },
-        "specSource": { "label": "Shokz公式ページ", "url": "https://jp.shokz.com/products/bone-conduction-headphone-openmove", "checkedAt": "2026-11-25" },
-        "specs": {
-          "battery": { "value": 6, "verified": true },
-          "weight": { "value": 29, "verified": true },
-          "waterproof": { "value": "IP55", "verified": true }
-        }
-      },
-      {
         "id": "hacray-orca",
         "name": "HACRAY Orca",
-        "maker": "HACRAY",
-        "model": "Orca",
+        "badge": "連続再生が最長",
+        "tagline": "連続再生は12時間。ここで紹介する3つの中で、いちばん長く使えます。",
+        "bestFor": "充電の回数を減らしたい人",
         "link": { "url": "https://item.rakuten.co.jp/abbinewyork/hr62019/", "label": "販売ページで見る", "ad": false },
         "referencePrice": { "amount": 13500, "checkedAt": "2026-11-25", "source": "楽天市場" },
         "specSource": { "label": "販売店の商品ページ(楽天市場)", "url": "https://item.rakuten.co.jp/abbinewyork/hr62019/", "checkedAt": "2026-11-25" },
@@ -38,10 +25,26 @@
         }
       },
       {
+        "id": "shokz-openmove",
+        "name": "Shokz OpenMove",
+        "badge": "入門モデル",
+        "tagline": "骨伝導イヤホンでよく名前を聞くShokzの、エントリーモデルです。まず試したい人向けです。",
+        "bestFor": "まず骨伝導を試したい人",
+        "link": { "url": "https://jp.shokz.com/products/bone-conduction-headphone-openmove", "label": "公式ページで見る", "ad": false },
+        "referencePrice": { "amount": 11880, "checkedAt": "2026-11-25", "source": "Shokz公式サイト" },
+        "specSource": { "label": "Shokz公式ページ", "url": "https://jp.shokz.com/products/bone-conduction-headphone-openmove", "checkedAt": "2026-11-25" },
+        "specs": {
+          "battery": { "value": 6, "verified": true },
+          "weight": { "value": 29, "verified": true },
+          "waterproof": { "value": "IP55", "verified": true }
+        }
+      },
+      {
         "id": "shokz-openrun",
         "name": "Shokz OpenRun",
-        "maker": "Shokz",
-        "model": "OpenRun",
+        "badge": "すっきりデザイン",
+        "tagline": "26gの軽さとIP67の防水。見た目のすっきり感を重視する人に向きます(デザインの評価は運営者の見立てです)。",
+        "bestFor": "見た目や軽さを重視する人",
         "link": { "url": "https://jp.shokz.com/products/openrun", "label": "公式ページで見る", "ad": false },
         "referencePrice": { "amount": 17880, "checkedAt": "2026-11-25", "source": "Shokz公式サイト" },
         "specSource": { "label": "Shokz公式ページ", "url": "https://jp.shokz.com/products/openrun", "checkedAt": "2026-11-25" },

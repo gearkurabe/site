@@ -1,20 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import genres from '../data/genres.json';
 const list = Object.entries(genres);
 ---
 <Base title="ギアクラブ" description="ガジェット・オーディオをスペックで比べるサイト">
-  <h1>ガジェット・オーディオを、スペックで比べる</h1>
-  <p class="lead">ジャンルを選ぶと、ランキングと比較表が見られます。</p>
-  <ul class="list">
+  <Hero slot="hero" eyebrow="GEAR CLUB" title="ガジェット・オーディオを、スペックで比べる" lead="初めての1台選びを、確認済みのスペックでサポートします。">
+    <a class="btn" href="/bone-conduction/">骨伝導イヤホンを見る</a>
+  </Hero>
+  <h2 style="margin-top:0">ジャンルから探す</h2>
+  <ul class="cards">
     {list.map(([slug, g]) => (
-      <li class="item">
-        <span class="rank">&#9654;</span>
-        <div>
-          <div class="name"><a href={`/${slug}/`}>{g.name}</a></div>
-          <div class="meta">{g.description}</div>
+      <li class="card">
+        <h2 class="card-name" style="margin:0"><a href={`/${slug}/`}>{g.name}</a></h2>
+        <p class="card-tagline">{g.description}</p>
+        <div class="card-bottom">
+          <span class="meta">{g.headline}</span>
+          <a class="btn" href={`/${slug}/`}>見てみる</a>
         </div>
-        <a class="btn" href={`/${slug}/`}>ランキングを見る</a>
       </li>
     ))}
   </ul>

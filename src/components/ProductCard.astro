@@ -1,0 +1,42 @@
+---
+const { p, n, specs } = Astro.props;
+const chips = specs
+  .map((s) => {
+    const v = p.specs && p.specs[s.key];
+    return v && v.verified === true ? { key: s.key, label: s.label, text: `${v.value}${s.unit}` } : null;
+  })
+  .filter(Boolean);
+---
+<li class="card">
+  <div class="card-top">
+    <span class="no">{String(n).padStart(2, '0')}</span>
+    <span class="badge">{p.badge}</span>
+  </div>
+  <h2 class="card-name">{p.name}</h2>
+  <p class="card-tagline">{p.tagline}</p>
+  <ul class="chips" aria-label="スペック">
+    {chips.map((c) => (
+      <li class="chip">
+        {c.key === 'battery' && (
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="2" y="7" width="17" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        )}
+        {c.key === 'weight' && (
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 20h12l-2-12H8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="5.5" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        )}
+        {c.key === 'waterproof' && (
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3c3.5 4.5 6 7.4 6 10.5a6 6 0 0 1-12 0C6 10.4 8.5 7.500 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        )}
+        <span class="chip-label">{c.label}</span><strong>{c.text}</strong>
+      </li>
+    ))}
+  </ul>
+  <p class="card-for"><strong>こんな人に:</strong>{p.bestFor}</p>
+  <div class="card-bottom">
+    <div class="price">
+      {p.referencePrice
+        ? <span><strong>{p.referencePrice.amount.toLocaleString('ja-JP')}円</strong><span class="meta">(参考価格・{p.referencePrice.checkedAt}時点・{p.referencePrice.source})</span></span>
+        : <span class="meta">価格は販売ページでご確認ください</span>}
+    </div>
+    <a class="btn" href={p.link.url} rel={p.link.ad ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{p.link.label}{p.link.ad && '(広告)'}</a>
+  </div>
+</li>

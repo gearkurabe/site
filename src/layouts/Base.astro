@@ -10,15 +10,18 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
     <meta name="robots" content="noindex" />
     <title>{full}</title>
     <meta name="description" content={description} />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f6b63'/%3E%3Cpath d='M9 21c0-7 3-10 7-10s7 3 7 10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <style is:global>
       :root {
-        --bg: #f7f8f8; --surface: #ffffff; --text: #1c2326; --muted: #5d6a6f;
-        --line: #d9dfe1; --accent: #0f6b63; --accent-bg: #e4f1ef;
+        --bg: #f4f7f7; --surface: #ffffff; --text: #13262a; --muted: #56666b;
+        --line: #d8e0e1; --accent: #0f6b63; --accent-bg: #e2f0ee; --accent-ink: #ffffff;
+        --hero1: #0a2a2d; --hero2: #0f6b63; --warm-bg: #fff1e0; --warm-ink: #8a4b0f;
       }
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #131819; --surface: #1b2224; --text: #e8eceb; --muted: #9aa8ab;
-          --line: #2d383b; --accent: #5cc4b8; --accent-bg: #1c3532;
+          --bg: #0f1516; --surface: #182022; --text: #e6eceb; --muted: #9ab0b3;
+          --line: #2a3639; --accent: #5cc4b8; --accent-bg: #1b3532; --accent-ink: #0a2a2d;
+          --warm-bg: #3a2d1f; --warm-ink: #f2b072;
         }
       }
       * { box-sizing: border-box; }
@@ -28,47 +31,85 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
         line-height: 1.8;
       }
       a { color: var(--accent); }
-      a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-      header, main, footer { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-      header { display: flex; justify-content: space-between; align-items: baseline; padding-top: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-      header .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
-      main { padding-top: 28px; padding-bottom: 48px; }
+      a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+      .site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+      .site-header .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; padding-bottom: 12px; }
+      .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: 0.02em; }
+      .nav a { margin-left: 18px; color: var(--muted); text-decoration: none; font-size: 0.92rem; }
+      .nav a:hover { color: var(--accent); }
+      .hero { background: linear-gradient(135deg, var(--hero1), var(--hero2)); color: #ffffff; }
+      .hero-inner { max-width: 900px; margin: 0 auto; padding: 44px 20px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+      .hero .eyebrow { margin: 0 0 8px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; color: #f0a35e; }
+      .hero h1 { margin: 0 0 12px; font-size: clamp(1.55rem, 4.2vw, 2.3rem); line-height: 1.35; font-weight: 800; letter-spacing: 0.01em; }
+      .hero-lead { margin: 0 0 20px; color: #d6e6e4; max-width: 34em; }
+      .hero-art { width: 220px; height: auto; }
+      .hero .btn { background: #f0a35e; color: #2a1704; font-weight: 700; }
+      main { max-width: 900px; margin: 0 auto; padding: 32px 20px 56px; }
       h1 { font-size: 1.6rem; line-height: 1.4; margin: 0 0 8px; }
       h2 { font-size: 1.15rem; margin: 28px 0 8px; }
       .lead { color: var(--muted); margin: 0 0 24px; }
-      .note { background: var(--accent-bg); border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; margin: 0 0 20px; }
-      .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-      .item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; }
-      .rank { font-size: 1.5rem; font-weight: 700; color: var(--accent); min-width: 2rem; text-align: center; }
-      .name { font-weight: 700; }
-      .meta { color: var(--muted); font-size: 0.9rem; }
-      .btn { display: inline-block; background: var(--accent); color: var(--surface); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
-      .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+      .note { background: var(--accent-bg); border-radius: 10px; padding: 12px 16px; font-size: 0.9rem; margin: 0 0 24px; }
+      .meta { color: var(--muted); font-size: 0.88rem; }
+      .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); padding: 10px 18px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 700; }
+      .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 20px; display: grid; gap: 10px; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
+      .card-top { display: flex; align-items: center; gap: 12px; }
+      .no { font-size: 0.9rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; }
+      .badge { display: inline-block; background: var(--warm-bg); color: var(--warm-ink); border-radius: 999px; padding: 2px 12px; font-size: 0.82rem; font-weight: 700; }
+      .card-name { margin: 0; font-size: 1.35rem; line-height: 1.4; }
+      .card-tagline { margin: 0; color: var(--muted); }
+      .chips { list-style: none; padding: 0; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-bg); border-radius: 999px; padding: 4px 14px; font-size: 0.88rem; color: var(--text); }
+      .chip svg { color: var(--accent); }
+      .chip-label { color: var(--muted); }
+      .card-for { margin: 0; font-size: 0.95rem; }
+      .card-for strong { margin-right: 6px; }
+      .card-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px dashed var(--line); padding-top: 14px; margin-top: 4px; }
+      .price strong { font-size: 1.15rem; margin-right: 6px; }
+      .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
       table { border-collapse: collapse; width: 100%; min-width: 560px; }
-      th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+      th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
       thead th { background: var(--accent-bg); }
       tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
       .pending { color: var(--muted); }
+      .best { color: var(--accent); font-weight: 800; }
       .sources { font-size: 0.85rem; color: var(--muted); margin: 16px 0 0; padding-left: 1.2rem; }
       .tabs { display: flex; gap: 8px; margin: 0 0 20px; }
-      .tabs a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--text); }
-      .tabs a[aria-current="page"] { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
-      footer { padding-top: 16px; padding-bottom: 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
-      footer .links a { margin-right: 16px; }
-      @media (max-width: 560px) { .item { grid-template-columns: auto 1fr; } .item .btn { grid-column: 1 / -1; text-align: center; } }
+      .tabs a { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--text); background: var(--surface); }
+      .tabs a[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+      .site-footer { border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 0.85rem; }
+      .site-footer .wrap { padding-top: 20px; padding-bottom: 32px; }
+      .site-footer .links a { margin-right: 16px; }
+      @media (max-width: 640px) {
+        .hero-inner { grid-template-columns: 1fr; padding: 32px 20px; }
+        .hero-art { width: 150px; }
+        .nav a { margin-left: 12px; }
+      }
     </style>
   </head>
   <body>
-    <header>
-      <a class="logo" href="/">ギアクラブ</a>
-      <span class="meta">ガジェット・オーディオの比較</span>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="logo" href="/">
+          <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0f6b63"/><path d="M9 21c0-7 3-10 7-10s7 3 7 10" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/></svg>
+          ギアクラブ
+        </a>
+        <nav class="nav" aria-label="サイト内の移動">
+          <a href="/">トップ</a>
+          <a href="/bone-conduction/">骨伝導イヤホン</a>
+        </nav>
+      </div>
     </header>
+    <slot name="hero" />
     <main>
       <slot />
     </main>
-    <footer>
-      <p>当サイトはアフィリエイト広告を利用しています。商品リンクから購入されると、運営者に報酬が入ることがあります。</p>
-      <p class="links"><a href="/about/">運営者情報</a><a href="/privacy/">プライバシーポリシー</a></p>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>当サイトはアフィリエイト広告を利用しています。商品リンクから購入されると、運営者に報酬が入ることがあります。</p>
+        <p class="links"><a href="/about/">運営者情報</a><a href="/privacy/">プライバシーポリシー</a></p>
+      </div>
     </footer>
   </body>
 </html>
