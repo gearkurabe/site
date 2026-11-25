@@ -8,9 +8,26 @@ export function getStaticPaths() {
 
 const { g } = Astro.props;
 const { genre } = Astro.params;
-const ranked = [...g.products].sort(
-  (a, b) => b.reviewRate - a.reviewRate || b.reviewCount - a.reviewCount
-);
+const spec = g.specs.find((s) => s.key === g.ranking.key);
+
+// 順位づけに使う値は「確認済み」のものだけ。確認中の商品は末尾に並べる
+const valueOf = (p) => {
+  const v = p.specs && p.specs[g.ranking.key];
+  return v && v.verified === true && typeof v.value === 'number' ? v.value : null;
+};
+const sign = g.ranking.order === 'asc' ? 1 : -1;
+const sorted = [...g.products].sort((a, b) => {
+  const va = valueOf(a), vb = valueOf(b);
+  if (va === null && vb === null) return 0;
+  if (va === null) return 1;
+  if (vb === null) return -1;
+  return (va - vb) * sign;
+});
+let rank = 0;
+const rows = sorted.map((p) => {
+  const v = valueOf(p);
+  return { p, v, rank: v === null ? null : ++rank };
+});
 ---
 <Base title={`${g.name}ランキング`} description={g.description}>
   <nav class="tabs" aria-label="表示の切り替え">
@@ -19,17 +36,21 @@ const ranked = [...g.products].sort(
   </nav>
   <h1>{g.name}ランキング</h1>
   <p class="lead">{g.description}</p>
-  <p class="note">このページには広告(アフィリエイトリンク)が含まれます。{g.rankingBasis}</p>
+  <p class="note">このページには広告(アフィリエイトリンク)が含まれます。順位は「{g.ranking.label}」で並べています。報酬の有無や大小は、順位に関係ありません。メーカー公式の情報を確認できていない商品は、末尾に表示します。</p>
   <ol class="list">
-    {ranked.map((p, i) => (
+    {rows.map(({ p, v, rank }) => (
       <li class="item">
-        <span class="rank">{i + 1}</span>
+        <span class="rank">{rank ?? '-'}</span>
         <div>
           <div class="name">{p.name}</div>
-          <div class="meta">レビュー {p.reviewRate}(全{p.reviewCount}件) / 価格 {p.price.toLocaleString('ja-JP')}円 / {p.store}</div>
+          <div class="meta">
+            {spec.label} {v === null ? '確認中' : `${v}${spec.unit}`}
+            {p.referencePrice && ` / 参考価格 ${p.referencePrice.amount.toLocaleString('ja-JP')}円(${p.referencePrice.checkedAt}時点)`}
+          </div>
         </div>
-        <a class="btn" href={p.url} rel="sponsored nofollow noopener">Yahoo!ショッピングで見る(広告)</a>
+        <a class="btn" href={p.url} rel="sponsored nofollow noopener">販売ページで見る(広告)</a>
       </li>
     ))}
   </ol>
+  <p class="meta">価格は変動します。最新の価格・在庫は、販売ページでご確認ください。</p>
 </Base>

@@ -39,12 +39,12 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .note { background: var(--accent-bg); border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; margin: 0 0 20px; }
       .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
       .item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; }
-      .rank { font-size: 1.5rem; font-weight: 700; color: var(--accent); min-width: 2rem; }
+      .rank { font-size: 1.5rem; font-weight: 700; color: var(--accent); min-width: 2rem; text-align: center; }
       .name { font-weight: 700; }
       .meta { color: var(--muted); font-size: 0.9rem; }
       .btn { display: inline-block; background: var(--accent); color: var(--surface); padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
       .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-      table { border-collapse: collapse; width: 100%; min-width: 640px; }
+      table { border-collapse: collapse; width: 100%; min-width: 560px; }
       th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
       thead th { background: var(--accent-bg); }
       tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
@@ -55,7 +55,6 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .tabs a[aria-current="page"] { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
       footer { padding-top: 16px; padding-bottom: 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
       footer .links a { margin-right: 16px; }
-      footer .credit { font-size: 1rem; color: var(--text); margin: 8px 0 0; }
       @media (max-width: 560px) { .item { grid-template-columns: auto 1fr; } .item .btn { grid-column: 1 / -1; text-align: center; } }
     </style>
   </head>
@@ -70,11 +69,6 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
     <footer>
       <p>当サイトはアフィリエイト広告を利用しています。商品リンクから購入されると、運営者に報酬が入ることがあります。</p>
       <p class="links"><a href="/about/">運営者情報</a><a href="/privacy/">プライバシーポリシー</a></p>
-      <p class="credit">
-        <!-- Begin Yahoo! JAPAN Web Services Attribution Snippet -->
-        <span style="margin:15px 15px 15px 15px"><a href="https://developer.yahoo.co.jp/sitemap/">Webサービス by Yahoo! JAPAN</a></span>
-        <!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
-      </p>
     </footer>
   </body>
 </html>

@@ -24,15 +24,13 @@ const specCell = (p, s) => {
   </nav>
   <h1>{g.name}の比較表</h1>
   <p class="lead">スペックを横に並べて比べられます。</p>
-  <p class="note">スペックは、メーカー公式の情報を確認できた値だけを掲載しています。確認できていない項目は「確認中」と表示します。価格とレビューは、Yahoo!ショッピングの情報です。</p>
+  <p class="note">スペックは、メーカー公式の情報を確認できた値だけを掲載しています。確認できていない項目は「確認中」と表示します。価格は参考価格で、変動します。最新の価格は、販売ページでご確認ください。</p>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th scope="col">商品</th>
-          <th scope="col">価格</th>
-          <th scope="col">レビュー</th>
-          <th scope="col">ストア</th>
+          <th scope="col">参考価格</th>
           {g.specs.map((s) => <th scope="col">{s.label}</th>)}
         </tr>
       </thead>
@@ -40,9 +38,11 @@ const specCell = (p, s) => {
         {g.products.map((p) => (
           <tr>
             <th scope="row">{p.name}</th>
-            <td>{p.price.toLocaleString('ja-JP')}円</td>
-            <td>{p.reviewRate}(全{p.reviewCount}件)</td>
-            <td>{p.store}</td>
+            <td>
+              {p.referencePrice
+                ? <span>{p.referencePrice.amount.toLocaleString('ja-JP')}円<br /><span class="meta">{p.referencePrice.checkedAt}時点</span></span>
+                : <span class="pending">-</span>}
+            </td>
             {g.specs.map((s) => {
               const c = specCell(p, s);
               return <td class:list={[!c.ok && 'pending']}>{c.text}</td>;
