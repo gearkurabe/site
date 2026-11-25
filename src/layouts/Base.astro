@@ -48,7 +48,9 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .hero .eyebrow { margin: 0 0 10px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; color: var(--accent-text); text-transform: uppercase; }
       .hero h1 { margin: 0 0 14px; font-size: clamp(1.7rem, 4.6vw, 2.7rem); line-height: 1.3; font-weight: 800; letter-spacing: -0.01em; }
       .hero-lead { margin: 0 0 24px; color: var(--muted); max-width: 32em; }
-      .hero-panel { background: var(--badge-bg); color: var(--text); border-radius: 24px; width: 260px; height: 220px; display: grid; place-items: center; }
+      .hero-panel { background: var(--badge-bg); color: var(--text); border-radius: 24px; width: 300px; height: 240px; display: grid; place-items: end center; overflow: hidden; }
+      .hero-panel.has-image { width: 360px; height: 260px; }
+      .hero-panel img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
       main { max-width: 900px; margin: 0 auto; padding: 32px 20px 64px; }
       h1 { font-size: 1.7rem; line-height: 1.4; margin: 0 0 8px; font-weight: 800; }
@@ -130,8 +132,8 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
 
       @media (max-width: 640px) {
         .hero-inner { grid-template-columns: 1fr; padding: 36px 20px 32px; }
-        .hero-panel { width: 100%; height: 150px; }
-        .hero-panel svg { width: 140px; }
+        .hero-panel, .hero-panel.has-image { width: 100%; height: 200px; }
+        .hero-panel svg { width: 190px; }
         .nav a { margin-left: 12px; }
         .band { font-size: 1.3rem; margin-top: 48px; }
         .card.product { grid-template-columns: 1fr; }

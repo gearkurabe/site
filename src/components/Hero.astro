@@ -1,5 +1,6 @@
 ---
-const { title, lead = '', eyebrow = '' } = Astro.props;
+import site from '../data/site.json';
+const { title, lead = '', eyebrow = '', image = site.heroImage, imageAlt = site.heroImageAlt } = Astro.props;
 ---
 <section class="hero">
   <div class="hero-inner">
@@ -9,16 +10,30 @@ const { title, lead = '', eyebrow = '' } = Astro.props;
       {lead && <p class="hero-lead">{lead}</p>}
       <slot />
     </div>
-    <div class="hero-panel" aria-hidden="true">
-      <svg viewBox="0 0 220 160" width="200" focusable="false">
-        <path d="M50 28 C50 128 170 128 170 28" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
-        <circle cx="50" cy="28" r="13" fill="#ff5a1f" />
-        <circle cx="170" cy="28" r="13" fill="#ff5a1f" />
-        <path d="M26 12 a34 34 0 0 0 0 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.55" />
-        <path d="M14 4 a48 48 0 0 0 0 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.28" />
-        <path d="M194 12 a34 34 0 0 1 0 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.55" />
-        <path d="M206 4 a48 48 0 0 1 0 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.28" />
-      </svg>
-    </div>
+    {image ? (
+      <div class="hero-panel has-image">
+        <img src={image} alt={imageAlt} width="680" height="480" loading="eager" decoding="async" />
+      </div>
+    ) : (
+      <div class="hero-panel" aria-hidden="true">
+        <svg viewBox="0 0 240 220" width="250" focusable="false">
+          <path d="M78 100 C70 150 80 176 120 177 C160 176 170 150 162 100" fill="none" stroke="#14110f" stroke-width="6" stroke-linecap="round" />
+          <path d="M26 220 C26 170 68 160 120 160 C172 160 214 170 214 220 Z" fill="#14110f" />
+          <path d="M104 160 L120 182 L136 160 Z" fill="#faf7f2" />
+          <rect x="102" y="126" width="36" height="42" rx="12" fill="#e6b48a" />
+          <ellipse cx="120" cy="92" rx="40" ry="46" fill="#f2c6a0" />
+          <ellipse cx="79" cy="97" rx="6" ry="10" fill="#e6b48a" />
+          <ellipse cx="161" cy="97" rx="6" ry="10" fill="#e6b48a" />
+          <path d="M79 88 C74 48 98 33 120 33 C142 33 166 48 161 88 C152 70 138 62 120 62 C102 62 88 70 79 88 Z" fill="#2b2623" />
+          <rect x="72" y="92" width="11" height="18" rx="5.5" fill="#ff5a1f" />
+          <rect x="157" y="92" width="11" height="18" rx="5.5" fill="#ff5a1f" />
+          <path d="M60 80 a34 34 0 0 0 0 36" fill="none" stroke="#14110f" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+          <path d="M180 80 a34 34 0 0 1 0 36" fill="none" stroke="#14110f" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+          <circle cx="106" cy="98" r="2.6" fill="#2b2623" />
+          <circle cx="134" cy="98" r="2.6" fill="#2b2623" />
+          <path d="M111 118 q9 7 18 0" fill="none" stroke="#2b2623" stroke-width="2.6" stroke-linecap="round" />
+        </svg>
+      </div>
+    )}
   </div>
 </section>
