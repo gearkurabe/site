@@ -15,7 +15,7 @@ const { genre } = Astro.params;
 const hasAd = g.products.some((p) => p.link && p.link.ad);
 ---
 <Base title={g.headline} description={g.description}>
-  <Hero slot="hero" eyebrow={g.name} title={g.headline} lead={g.description} />
+  <Hero slot="hero" compact eyebrow={g.name} title={g.headline} lead={g.description} />
   <nav class="tabs" aria-label="表示の切り替え">
     <a href={`/${genre}/`} aria-current="page">おすすめ</a>
     <a href={`/${genre}/compare/`}>比較表</a>

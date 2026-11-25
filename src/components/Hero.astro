@@ -1,8 +1,8 @@
 ---
 import site from '../data/site.json';
-const { title, lead = '', eyebrow = '', image = site.heroImage } = Astro.props;
+const { title, lead = '', eyebrow = '', image = site.heroImage, compact = false } = Astro.props;
 ---
-<section class:list={['hero', image && 'hero--photo']}>
+<section class:list={['hero', image && 'hero--photo', compact && 'hero--compact']}>
   {image && (
     <div class="hero-photo-wrap">
       <img

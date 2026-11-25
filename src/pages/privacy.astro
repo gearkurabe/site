@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 ---
 <Base title="プライバシーポリシー" description="ギアクラブのプライバシーポリシー">
-  <h1>プライバシーポリシー</h1>
+  <Hero slot="hero" compact eyebrow="PRIVACY" title="プライバシーポリシー" lead="当サイトでの情報の取り扱いについて説明します。" />
   <h2>取得する情報</h2>
   <p>当サイトでは、会員登録などでお客様の氏名・住所などの個人情報をお預かりすることはありません。ただし、サイトの配信に使うサービスや広告サービスが、アクセス情報(IPアドレス、閲覧したページ、ブラウザの種類など)を自動的に取得する場合があります。</p>
   <h2>広告について</h2>
