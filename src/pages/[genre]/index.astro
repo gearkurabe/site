@@ -9,6 +9,7 @@ export function getStaticPaths() {
 const { g } = Astro.props;
 const { genre } = Astro.params;
 const spec = g.specs.find((s) => s.key === g.ranking.key);
+const hasAd = g.products.some((p) => p.link && p.link.ad);
 
 // 順位づけに使う値は「確認済み」のものだけ。確認中の商品は末尾に並べる
 const valueOf = (p) => {
@@ -36,7 +37,7 @@ const rows = sorted.map((p) => {
   </nav>
   <h1>{g.name}ランキング</h1>
   <p class="lead">{g.description}</p>
-  <p class="note">このページには広告(アフィリエイトリンク)が含まれます。順位は「{g.ranking.label}」で並べています。報酬の有無や大小は、順位に関係ありません。メーカー公式の情報を確認できていない商品は、末尾に表示します。</p>
+  <p class="note">{hasAd && 'このページには広告(アフィリエイトリンク)が含まれます。'}順位は「{g.ranking.label}」で並べています。報酬の有無や大小は、順位に関係ありません。スペックを確認できていない商品は、末尾に表示します。</p>
   <ol class="list">
     {rows.map(({ p, v, rank }) => (
       <li class="item">
@@ -45,10 +46,10 @@ const rows = sorted.map((p) => {
           <div class="name">{p.name}</div>
           <div class="meta">
             {spec.label} {v === null ? '確認中' : `${v}${spec.unit}`}
-            {p.referencePrice && ` / 参考価格 ${p.referencePrice.amount.toLocaleString('ja-JP')}円(${p.referencePrice.checkedAt}時点)`}
+            {p.referencePrice && ` / 参考価格 ${p.referencePrice.amount.toLocaleString('ja-JP')}円(${p.referencePrice.checkedAt}時点・${p.referencePrice.source})`}
           </div>
         </div>
-        <a class="btn" href={p.url} rel="sponsored nofollow noopener">販売ページで見る(広告)</a>
+        <a class="btn" href={p.link.url} rel={p.link.ad ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{p.link.label}{p.link.ad && '(広告)'}</a>
       </li>
     ))}
   </ol>
