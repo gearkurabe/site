@@ -8,11 +8,29 @@ const list = Object.entries(genres);
   <Hero slot="hero" eyebrow="GEAR CLUB" title="ガジェット・オーディオを、スペックで比べる" lead="初めての1台選びを、確認済みのスペックでサポートします。">
     <a class="btn" href="/bone-conduction/">骨伝導イヤホンを見る</a>
   </Hero>
-  <h2 style="margin-top:0">ジャンルから探す</h2>
+  <h2 class="band" style="margin-top:0">ギアクラブの3つの約束</h2>
+  <ul class="features">
+    <li class="feature">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12.5l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>確認したスペックだけ</h3>
+      <p>公式などで確認できた値だけを載せます。確認できていない項目は「確認中」と表示します。</p>
+    </li>
+    <li class="feature">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>出典と確認日つき</h3>
+      <p>スペックの出典ページと、確認した日付を、比較表のページに載せています。</p>
+    </li>
+    <li class="feature">
+      <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>初めての人向けに厳選</h3>
+      <p>数を並べず、タイプの違いで絞って紹介します。順番は優劣ではありません。</p>
+    </li>
+  </ul>
+  <h2 class="band">ジャンルから探す</h2>
   <ul class="cards">
     {list.map(([slug, g]) => (
       <li class="card">
-        <h2 class="card-name" style="margin:0"><a href={`/${slug}/`}>{g.name}</a></h2>
+        <h3 class="card-name" style="margin:0"><a href={`/${slug}/`}>{g.name}</a></h3>
         <p class="card-tagline">{g.description}</p>
         <div class="card-bottom">
           <span class="meta">{g.headline}</span>

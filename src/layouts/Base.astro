@@ -15,16 +15,17 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       :root {
         --bg: #f4f7f7; --surface: #ffffff; --text: #13262a; --muted: #56666b;
         --line: #d8e0e1; --accent: #0f6b63; --accent-bg: #e2f0ee; --accent-ink: #ffffff;
-        --hero1: #0a2a2d; --hero2: #0f6b63; --warm-bg: #fff1e0; --warm-ink: #8a4b0f;
+        --hero1: #0a2a2d; --hero2: #0f6b63; --warm: #f0a35e; --warm-bg: #fff1e0; --warm-ink: #8a4b0f;
       }
       @media (prefers-color-scheme: dark) {
         :root {
           --bg: #0f1516; --surface: #182022; --text: #e6eceb; --muted: #9ab0b3;
           --line: #2a3639; --accent: #5cc4b8; --accent-bg: #1b3532; --accent-ink: #0a2a2d;
-          --warm-bg: #3a2d1f; --warm-ink: #f2b072;
+          --warm: #f2b072; --warm-bg: #3a2d1f; --warm-ink: #f2b072;
         }
       }
       * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         margin: 0; background: var(--bg); color: var(--text);
         font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
@@ -41,10 +42,10 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .hero { background: linear-gradient(135deg, var(--hero1), var(--hero2)); color: #ffffff; }
       .hero-inner { max-width: 900px; margin: 0 auto; padding: 44px 20px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
       .hero .eyebrow { margin: 0 0 8px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; color: #f0a35e; }
-      .hero h1 { margin: 0 0 12px; font-size: clamp(1.55rem, 4.2vw, 2.3rem); line-height: 1.35; font-weight: 800; letter-spacing: 0.01em; }
+      .hero h1 { margin: 0 0 12px; font-size: clamp(1.55rem, 4.2vw, 2.3rem); line-height: 1.35; font-weight: 800; letter-spacing: 0.01em; color: #ffffff; }
       .hero-lead { margin: 0 0 20px; color: #d6e6e4; max-width: 34em; }
       .hero-art { width: 220px; height: auto; }
-      .hero .btn { background: #f0a35e; color: #2a1704; font-weight: 700; }
+      .hero .btn { background: #f0a35e; color: #2a1704; }
       main { max-width: 900px; margin: 0 auto; padding: 32px 20px 56px; }
       h1 { font-size: 1.6rem; line-height: 1.4; margin: 0 0 8px; }
       h2 { font-size: 1.15rem; margin: 28px 0 8px; }
@@ -52,11 +53,27 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .note { background: var(--accent-bg); border-radius: 10px; padding: 12px 16px; font-size: 0.9rem; margin: 0 0 24px; }
       .meta { color: var(--muted); font-size: 0.88rem; }
       .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); padding: 10px 18px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 700; }
+
+      /* 見出しの帯・目次 */
+      .band { display: flex; align-items: center; gap: 12px; margin: 44px 0 18px; padding: 12px 18px; border-radius: 12px; color: #ffffff; font-size: 1.2rem; background: linear-gradient(135deg, var(--hero1), var(--hero2)); scroll-margin-top: 16px; }
+      .band::before { content: ""; width: 6px; align-self: stretch; border-radius: 3px; background: var(--warm); }
+      .toc { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 20px; margin: 0 0 8px; }
+      .toc-title { margin: 0 0 4px; font-weight: 800; }
+      .toc ol { margin: 0; padding-left: 1.4rem; }
+      .toc a { text-decoration: none; }
+      .toc a:hover { text-decoration: underline; }
+
+      /* カード */
       .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
-      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 20px; display: grid; gap: 10px; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
-      .card-top { display: flex; align-items: center; gap: 12px; }
+      .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 20px; display: grid; gap: 10px; }
+      .card.product { grid-template-columns: 190px 1fr; gap: 22px; align-items: start; }
+      .card-art { margin: 0; min-height: 170px; border-radius: 12px; background: linear-gradient(135deg, var(--hero1), var(--hero2)); display: grid; place-items: center; align-content: center; gap: 8px; padding: 14px 10px; text-align: center; }
+      .card-art figcaption { color: #cfe3e0; font-size: 0.72rem; line-height: 1.5; }
+      .card-body { display: grid; gap: 10px; min-width: 0; }
+      .card-top { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
       .no { font-size: 0.9rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; }
       .badge { display: inline-block; background: var(--warm-bg); color: var(--warm-ink); border-radius: 999px; padding: 2px 12px; font-size: 0.82rem; font-weight: 700; }
+      .maker { display: inline-block; border: 1px solid var(--line); color: var(--muted); border-radius: 6px; padding: 0 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; }
       .card-name { margin: 0; font-size: 1.35rem; line-height: 1.4; }
       .card-tagline { margin: 0; color: var(--muted); }
       .chips { list-style: none; padding: 0; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -67,6 +84,35 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .card-for strong { margin-right: 6px; }
       .card-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px dashed var(--line); padding-top: 14px; margin-top: 4px; }
       .price strong { font-size: 1.15rem; margin-right: 6px; }
+      .card-name a { text-decoration: none; }
+
+      /* 特徴カード(トップ) */
+      .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 0 0 8px; padding: 0; list-style: none; }
+      .feature { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+      .feature svg { color: var(--accent); }
+      .feature h3 { margin: 8px 0 4px; font-size: 1.02rem; }
+      .feature p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+      /* しくみの図 */
+      .flows { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 14px; }
+      .flow-label { margin: 0 0 6px; font-weight: 800; }
+      .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+      .step { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; font-size: 0.92rem; }
+      .step.hl { background: var(--warm-bg); border-color: transparent; color: var(--warm-ink); font-weight: 700; }
+      .arrow { color: var(--muted); }
+
+      /* スペックのグラフ */
+      .bars { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px 18px; margin: 0 0 16px; }
+      .bars-title { margin: 0 0 4px; font-size: 1.05rem; }
+      .bars-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 10px; }
+      .bar-row { display: grid; grid-template-columns: 10em 1fr 6.5em; align-items: center; gap: 12px; }
+      .bar-name { font-weight: 700; font-size: 0.92rem; }
+      .bar-track { background: var(--accent-bg); border-radius: 999px; height: 14px; overflow: hidden; }
+      .bar-fill { display: block; height: 100%; border-radius: 999px; background: var(--accent); opacity: 0.55; }
+      .bar-fill.is-best { background: var(--warm); opacity: 1; }
+      .bar-val { text-align: right; font-weight: 700; white-space: nowrap; }
+
+      /* 表 */
       .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
       table { border-collapse: collapse; width: 100%; min-width: 560px; }
       th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
@@ -85,6 +131,10 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
         .hero-inner { grid-template-columns: 1fr; padding: 32px 20px; }
         .hero-art { width: 150px; }
         .nav a { margin-left: 12px; }
+        .card.product { grid-template-columns: 1fr; }
+        .card-art { min-height: 120px; }
+        .bar-row { grid-template-columns: 1fr auto; }
+        .bar-track { grid-column: 1 / -1; order: 3; }
       }
     </style>
   </head>

@@ -2,6 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import SpecBars from '../../components/SpecBars.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
 import genres from '../../data/genres.json';
 
 export function getStaticPaths() {
@@ -13,14 +15,33 @@ const { genre } = Astro.params;
 const hasAd = g.products.some((p) => p.link && p.link.ad);
 ---
 <Base title={g.headline} description={g.description}>
-  <Hero slot="hero" eyebrow={g.name.toUpperCase() === g.name ? g.name : '骨伝導イヤホン'} title={g.headline} lead={g.description} />
+  <Hero slot="hero" eyebrow={g.name} title={g.headline} lead={g.description} />
   <nav class="tabs" aria-label="表示の切り替え">
     <a href={`/${genre}/`} aria-current="page">おすすめ</a>
     <a href={`/${genre}/compare/`}>比較表</a>
   </nav>
   <p class="note">{hasAd && 'このページには広告(アフィリエイトリンク)が含まれます。'}タイプの違いで{g.products.length}つを選びました。順番は優劣ではありません。「こんな人に」とデザインの感想は運営者の見立てで、スペックは確認した値です。</p>
+
+  <nav class="toc" aria-label="目次">
+    <p class="toc-title">目次</p>
+    <ol>
+      <li><a href="#about">{g.name}とは?</a></li>
+      <li><a href="#picks">おすすめ{g.products.length}選</a></li>
+      <li><a href="#graphs">スペックをグラフで比べる</a></li>
+    </ol>
+  </nav>
+
+  <h2 class="band" id="about">{g.name}とは?</h2>
+  <p>耳の穴をふさがずに、骨を伝わる振動で音を聞くイヤホンです。周囲の音も聞こえやすいので、通勤や運動、在宅ワークなどの「ながら聴き」に向いています。</p>
+  <HowItWorks />
+
+  <h2 class="band" id="picks">おすすめ{g.products.length}選</h2>
   <ol class="cards">
     {g.products.map((p, i) => <ProductCard p={p} n={i + 1} specs={g.specs} />)}
   </ol>
+
+  <h2 class="band" id="graphs">スペックをグラフで比べる</h2>
+  <SpecBars products={g.products} specKey="battery" unit="時間" better="max" title="連続再生時間" note="長いほど、充電の回数が少なくて済みます(◎は最長)。" />
+  <SpecBars products={g.products} specKey="weight" unit="g" better="min" title="重さ" note="数字が小さいほど軽いです(◎は最軽量)。" />
   <p class="meta" style="margin-top:20px">価格は変動します。最新の価格・在庫は、販売ページでご確認ください。スペックの出典と確認日は、<a href={`/${genre}/compare/`}>比較表</a>のページに載せています。</p>
 </Base>

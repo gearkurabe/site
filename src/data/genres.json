@@ -12,6 +12,7 @@
       {
         "id": "hacray-orca",
         "name": "HACRAY Orca",
+        "maker": "HACRAY",
         "badge": "連続再生が最長",
         "tagline": "連続再生は12時間。ここで紹介する3つの中で、いちばん長く使えます。",
         "bestFor": "充電の回数を減らしたい人",
@@ -27,6 +28,7 @@
       {
         "id": "shokz-openmove",
         "name": "Shokz OpenMove",
+        "maker": "Shokz",
         "badge": "入門モデル",
         "tagline": "骨伝導イヤホンでよく名前を聞くShokzの、エントリーモデルです。まず試したい人向けです。",
         "bestFor": "まず骨伝導を試したい人",
@@ -42,6 +44,7 @@
       {
         "id": "shokz-openrun",
         "name": "Shokz OpenRun",
+        "maker": "Shokz",
         "badge": "すっきりデザイン",
         "tagline": "26gの軽さとIP67の防水。見た目のすっきり感を重視する人に向きます(デザインの評価は運営者の見立てです)。",
         "bestFor": "見た目や軽さを重視する人",
