@@ -32,7 +32,7 @@ const specCell = (p, s) => {
 };
 ---
 <Base title={`${g.name}の比較表`} description={g.description}>
-  <Hero slot="hero" eyebrow="COMPARE" title={`${g.name}の比較表`} lead="確認済みのスペックを、横に並べて比べられます。" />
+  <Hero slot="hero" eyebrow="COMPARE" image={false} title={`${g.name}の比較表`} lead="確認済みのスペックを、横に並べて比べられます。" />
   <nav class="tabs" aria-label="表示の切り替え">
     <a href={`/${genre}/`}>おすすめ</a>
     <a href={`/${genre}/compare/`} aria-current="page">比較表</a>
