@@ -26,6 +26,17 @@ const list = Object.entries(genres);
       <p>数を並べず、タイプの違いで絞って紹介します。順番は優劣ではありません。</p>
     </li>
   </ul>
+  <h2 class="band">はじめに読む</h2>
+  <ul class="cards">
+    <li class="card">
+      <h3 class="card-name" style="margin:0"><a href="/what-is-bone-conduction/">骨伝導イヤホンとは?しくみと、普通のイヤホンとの違い</a></h3>
+      <p class="card-tagline">初めて買う前に知っておきたい基本を、図と表でまとめました。</p>
+      <div class="card-bottom">
+        <span class="meta">約4分で読めます</span>
+        <a class="btn" href="/what-is-bone-conduction/">読む</a>
+      </div>
+    </li>
+  </ul>
   <h2 class="band">ジャンルから探す</h2>
   <ul class="cards">
     {list.map(([slug, g]) => (
