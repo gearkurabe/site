@@ -8,7 +8,9 @@ export function getStaticPaths() {
 
 const { g } = Astro.props;
 const { genre } = Astro.params;
-const ranked = [...g.products].sort((a, b) => b.score - a.score);
+const ranked = [...g.products].sort(
+  (a, b) => b.reviewRate - a.reviewRate || b.reviewCount - a.reviewCount
+);
 ---
 <Base title={`${g.name}ランキング`} description={g.description}>
   <nav class="tabs" aria-label="表示の切り替え">
@@ -17,15 +19,16 @@ const ranked = [...g.products].sort((a, b) => b.score - a.score);
   </nav>
   <h1>{g.name}ランキング</h1>
   <p class="lead">{g.description}</p>
+  <p class="note">このページには広告(アフィリエイトリンク)が含まれます。{g.rankingBasis}</p>
   <ol class="list">
     {ranked.map((p, i) => (
       <li class="item">
         <span class="rank">{i + 1}</span>
         <div>
           <div class="name">{p.name}</div>
-          <div class="meta">評価 {p.score} / 価格 {p.price.toLocaleString('ja-JP')}円</div>
+          <div class="meta">レビュー {p.reviewRate}(全{p.reviewCount}件) / 価格 {p.price.toLocaleString('ja-JP')}円 / {p.store}</div>
         </div>
-        <a class="btn" href={p.url} rel="sponsored nofollow noopener">商品ページへ</a>
+        <a class="btn" href={p.url} rel="sponsored nofollow noopener">Yahoo!ショッピングで見る(広告)</a>
       </li>
     ))}
   </ol>

@@ -2,16 +2,60 @@
   "bone-conduction": {
     "name": "骨伝導イヤホン",
     "description": "耳をふさがず使える骨伝導イヤホンを、スペックで比べます。",
+    "rankingBasis": "Yahoo!ショッピングのレビュー平均が高い順に並べています(同点の場合はレビュー件数が多い順)。",
     "specs": [
-      { "key": "price", "label": "価格", "unit": "円" },
       { "key": "battery", "label": "連続再生", "unit": "時間" },
       { "key": "weight", "label": "重さ", "unit": "g" },
       { "key": "waterproof", "label": "防水等級", "unit": "" }
     ],
     "products": [
-      { "id": "sample-a", "name": "サンプル商品A(ダミー)", "score": 4.5, "url": "#", "price": 12000, "battery": 8, "weight": 30, "waterproof": "IP55" },
-      { "id": "sample-b", "name": "サンプル商品B(ダミー)", "score": 4.2, "url": "#", "price": 9000, "battery": 6, "weight": 28, "waterproof": "IP44" },
-      { "id": "sample-c", "name": "サンプル商品C(ダミー)", "score": 3.9, "url": "#", "price": 15000, "battery": 10, "weight": 35, "waterproof": "IP67" }
+      {
+        "id": "sample-a",
+        "name": "サンプル商品A(ダミー)",
+        "jan": "0000000000001",
+        "price": 12000,
+        "reviewRate": 4.5,
+        "reviewCount": 120,
+        "store": "サンプルストア",
+        "url": "#",
+        "specSource": { "label": "メーカー公式ページ(ダミー)", "url": "#", "checkedAt": "2026-11-25" },
+        "specs": {
+          "battery": { "value": 8, "verified": true },
+          "weight": { "value": 30, "verified": true },
+          "waterproof": { "value": "IP55", "verified": true }
+        }
+      },
+      {
+        "id": "sample-b",
+        "name": "サンプル商品B(ダミー)",
+        "jan": "0000000000002",
+        "price": 9000,
+        "reviewRate": 4.2,
+        "reviewCount": 80,
+        "store": "サンプルストア",
+        "url": "#",
+        "specSource": { "label": "メーカー公式ページ(ダミー)", "url": "#", "checkedAt": "2026-11-25" },
+        "specs": {
+          "battery": { "value": 6, "verified": true },
+          "weight": { "value": 28, "verified": false }
+        }
+      },
+      {
+        "id": "sample-c",
+        "name": "サンプル商品C(ダミー)",
+        "jan": "0000000000003",
+        "price": 15000,
+        "reviewRate": 3.9,
+        "reviewCount": 45,
+        "store": "サンプルストア",
+        "url": "#",
+        "specSource": { "label": "メーカー公式ページ(ダミー)", "url": "#", "checkedAt": "2026-11-25" },
+        "specs": {
+          "battery": { "value": 10, "verified": true },
+          "weight": { "value": 35, "verified": true },
+          "waterproof": { "value": "IP67", "verified": true }
+        }
+      }
     ]
   }
 }

@@ -8,7 +8,14 @@ export function getStaticPaths() {
 
 const { g } = Astro.props;
 const { genre } = Astro.params;
-const fmt = (v, unit) => (typeof v === 'number' ? v.toLocaleString('ja-JP') : v) + unit;
+
+// 確認済み(verified: true)の値だけを表示し、それ以外は「確認中」にする
+const specCell = (p, s) => {
+  const v = p.specs && p.specs[s.key];
+  return v && v.verified === true
+    ? { text: `${v.value}${s.unit}`, ok: true }
+    : { text: '確認中', ok: false };
+};
 ---
 <Base title={`${g.name}の比較表`} description={g.description}>
   <nav class="tabs" aria-label="表示の切り替え">
@@ -17,11 +24,15 @@ const fmt = (v, unit) => (typeof v === 'number' ? v.toLocaleString('ja-JP') : v)
   </nav>
   <h1>{g.name}の比較表</h1>
   <p class="lead">スペックを横に並べて比べられます。</p>
+  <p class="note">スペックは、メーカー公式の情報を確認できた値だけを掲載しています。確認できていない項目は「確認中」と表示します。価格とレビューは、Yahoo!ショッピングの情報です。</p>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th scope="col">商品</th>
+          <th scope="col">価格</th>
+          <th scope="col">レビュー</th>
+          <th scope="col">ストア</th>
           {g.specs.map((s) => <th scope="col">{s.label}</th>)}
         </tr>
       </thead>
@@ -29,10 +40,21 @@ const fmt = (v, unit) => (typeof v === 'number' ? v.toLocaleString('ja-JP') : v)
         {g.products.map((p) => (
           <tr>
             <th scope="row">{p.name}</th>
-            {g.specs.map((s) => <td>{fmt(p[s.key], s.unit)}</td>)}
+            <td>{p.price.toLocaleString('ja-JP')}円</td>
+            <td>{p.reviewRate}(全{p.reviewCount}件)</td>
+            <td>{p.store}</td>
+            {g.specs.map((s) => {
+              const c = specCell(p, s);
+              return <td class:list={[!c.ok && 'pending']}>{c.text}</td>;
+            })}
           </tr>
         ))}
       </tbody>
     </table>
   </div>
+  <ul class="sources">
+    {g.products.filter((p) => p.specSource).map((p) => (
+      <li>{p.name}のスペック出典:<a href={p.specSource.url} rel="noopener nofollow">{p.specSource.label}</a>(確認日 {p.specSource.checkedAt})</li>
+    ))}
+  </ul>
 </Base>
