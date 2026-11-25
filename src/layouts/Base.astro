@@ -10,13 +10,12 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
     <meta name="robots" content="noindex" />
     <title>{full}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff5a1f'/%3E%3Cpath d='M9 21c0-7 3-10 7-10s7 3 7 10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f5b942'/%3E%3Cpath d='M9 21c0-7 3-10 7-10s7 3 7 10' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <style is:global>
       :root {
-        color-scheme: dark;
-        --bg: #0e0f10; --surface: #17191b; --text: #f2f2f0; --muted: #a3a9ae; --line: #2a2e32;
-        --accent: #f5b942; --accent-text: #f5b942; --tint: #1a1c1f;
-        --badge-bg: #3a2f12; --badge-ink: #f5b942; --btn-bg: #f5b942; --btn-fg: #1a1304;
+        --bg: #f5f5f3; --surface: #ffffff; --text: #111111; --muted: #5a5a5a; --line: #dcdcd8;
+        --accent: #f5b942; --accent-text: #8a5a00; --tint: #fff7e3;
+        --badge-bg: #fff1cf; --badge-ink: #6b4a00; --btn-bg: #111111; --btn-fg: #ffffff;
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
@@ -29,15 +28,18 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
       .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
-      .site-header { border-bottom: 1px solid var(--line); }
+      .site-header { background: #111111; }
       .site-header .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; padding-bottom: 14px; }
-      .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
-      .logo svg rect { fill: var(--text); }
-      .logo svg path { stroke: var(--bg); }
-      .nav a { margin-left: 20px; color: var(--muted); text-decoration: none; font-size: 0.92rem; }
-      .nav a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+      .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 800; color: #ffffff; text-decoration: none; letter-spacing: 0.04em; }
+      .logo svg rect { fill: #f5b942; }
+      .logo svg path { stroke: #111111; }
+      .nav a { margin-left: 20px; color: #bdbdbd; text-decoration: none; font-size: 0.92rem; }
+      .nav a:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 4px; }
 
-      .hero { border-bottom: 1px solid var(--line); }
+      .hero { background: #111111; color: #f2f2f0; }
+      .hero h1 { color: #f2f2f0; }
+      .hero .eyebrow { color: #f5b942; }
+      .hero-lead { color: #c9cdd1; }
       .hero-inner { max-width: 900px; margin: 0 auto; padding: 56px 20px 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
       .hero .eyebrow { margin: 0 0 10px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; color: var(--accent-text); text-transform: uppercase; }
       .hero h1 { margin: 0 0 14px; font-size: clamp(1.7rem, 4.6vw, 2.7rem); line-height: 1.3; font-weight: 800; letter-spacing: -0.01em; }
@@ -45,11 +47,11 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .hero-panel { background: var(--badge-bg); color: var(--text); border-radius: 24px; width: 300px; height: 240px; display: grid; place-items: center; overflow: hidden; }
       .hero-panel.has-image { width: 360px; height: 260px; }
       .hero-panel img { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .hero--photo { position: relative; overflow: hidden; background: #0e0f10; }
+      .hero--photo { position: relative; overflow: hidden; background: #111111; }
       .hero-photo-wrap { position: absolute; inset: 0; }
       .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: 78% 40%; display: block; }
-      .hero-credit { position: absolute; right: 12px; bottom: 10px; background: rgba(14,15,16,0.78); color: #f2f2f0; font-size: 0.82rem; font-weight: 700; line-height: 1.7; padding: 1px 10px; border-radius: 4px; }
-      .hero--photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(14,15,16,0.95) 0%, rgba(14,15,16,0.82) 40%, rgba(14,15,16,0) 68%); }
+      .hero-credit { position: absolute; right: 12px; bottom: 10px; background: rgba(17,17,17,0.78); color: #f2f2f0; font-size: 0.82rem; font-weight: 700; line-height: 1.7; padding: 1px 10px; border-radius: 4px; }
+      .hero--photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.82) 40%, rgba(17,17,17,0) 68%); }
       .hero--photo .hero-inner { position: relative; z-index: 2; grid-template-columns: 1fr; min-height: 440px; padding-top: 64px; padding-bottom: 64px; align-items: center; }
       .hero--photo .hero-text { max-width: 460px; }
       .hero--photo h1 { color: #f2f2f0; }
@@ -70,7 +72,7 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .note { background: var(--tint); border-radius: 8px; padding: 12px 16px; font-size: 0.9rem; margin: 0 0 28px; }
       .meta { color: var(--muted); font-size: 0.88rem; }
       .btn { display: inline-block; background: var(--btn-bg); color: var(--btn-fg); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 2px solid var(--btn-bg); }
-      .btn:hover { background: #ffffff; border-color: #ffffff; color: #111111; }
+      .btn:hover { background: var(--accent); border-color: var(--accent); color: #111111; }
 
       .band { display: flex; align-items: baseline; gap: 14px; margin: 64px 0 22px; padding: 0 0 8px; border-bottom: 2px solid var(--text); font-size: 1.55rem; font-weight: 800; letter-spacing: -0.01em; scroll-margin-top: 16px; }
       .band::before { counter-increment: sec; content: counter(sec, decimal-leading-zero); color: var(--accent-text); font-size: 0.95rem; font-weight: 800; letter-spacing: 0.1em; }
@@ -137,7 +139,8 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
       .tabs a { padding: 6px 16px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--text); background: var(--surface); }
       .tabs a[aria-current="page"] { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-fg); font-weight: 700; }
 
-      .site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+      .site-footer { background: #111111; color: #bdbdbd; font-size: 0.85rem; }
+      .site-footer a { color: #f2f2f0; }
       .site-footer .wrap { padding-top: 22px; padding-bottom: 36px; }
       .site-footer .links a { margin-right: 16px; }
 
@@ -146,15 +149,15 @@ const full = title === 'ギアクラブ' ? title : `${title} | ギアクラブ`;
         .hero-panel, .hero-panel.has-image { width: 100%; height: 200px; }
         .hero-panel svg { width: 190px; }
         .nav a { margin-left: 12px; }
-        .hero--photo { background: var(--bg); }
+        .hero--photo { background: #111111; }
         .hero--photo::before { display: none; }
         .hero--photo .hero-photo-wrap { position: relative; height: 230px; }
         .hero--photo .hero-photo { object-position: 82% 30%; }
         .hero--photo .hero-inner { min-height: 0; padding: 26px 20px 32px; }
-        .hero--photo h1 { color: var(--text); }
-        .hero--photo .eyebrow { color: var(--accent-text); }
-        .hero--photo .hero-lead { color: var(--muted); }
-        .hero--photo .btn { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-fg); }
+        .hero--photo h1 { color: #f2f2f0; }
+        .hero--photo .eyebrow { color: #f5b942; }
+        .hero--photo .hero-lead { color: #c9cdd1; }
+        .hero--photo .btn { background: #f5b942; border-color: #f5b942; color: #1a1304; }
         .hero--photo.hero--compact .hero-photo-wrap { height: 150px; }
         .hero--photo.hero--compact .hero-inner { padding: 20px 20px 24px; }
         .band { font-size: 1.3rem; margin-top: 48px; }
