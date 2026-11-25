@@ -22,7 +22,7 @@ const { title, lead = '', eyebrow = '', image = site.heroImage } = Astro.props;
   <div class="hero-inner">
     <div class="hero-text">
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1>{title}</h1>
+      <h1 set:html={String(title).split('|').join('<br>')}></h1>
       {lead && <p class="hero-lead">{lead}</p>}
       <slot />
     </div>
