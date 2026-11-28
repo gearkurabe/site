@@ -37,7 +37,7 @@ const hasAd = g.products.some((p) => p.link && p.link.ad);
 
   <h2 class="band" id="picks">おすすめ{g.products.length}選</h2>
   <ol class="cards">
-    {g.products.map((p, i) => <ProductCard p={p} n={i + 1} specs={g.specs} />)}
+    {g.products.map((p, i) => <ProductCard p={p} n={i + 1} specs={g.specs} genre={genre} />)}
   </ol>
 
   <h2 class="band" id="graphs">スペックをグラフで比べる</h2>

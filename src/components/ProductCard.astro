@@ -1,5 +1,5 @@
 ---
-const { p, n, specs } = Astro.props;
+const { p, n, specs, genre } = Astro.props;
 const chips = specs
   .map((s) => {
     const v = p.specs && p.specs[s.key];
@@ -43,13 +43,14 @@ const chips = specs
       ))}
     </ul>
     <p class="card-for"><strong>こんな人に:</strong>{p.bestFor}</p>
+    {genre && <p class="card-more"><a href={`/${genre}/${p.id}/`}>{p.name}のスペックと特徴を見る</a></p>}
     <div class="card-bottom">
       <div class="price">
         {p.referencePrice
           ? <span><strong>{p.referencePrice.amount.toLocaleString('ja-JP')}円</strong><span class="meta">(参考価格・{p.referencePrice.checkedAt}時点・{p.referencePrice.source})</span></span>
           : <span class="meta">価格は販売ページでご確認ください</span>}
       </div>
-      <a class="btn" href={p.link.url} rel={p.link.ad ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{p.link.label}{p.link.ad && '(広告)'}</a>
+      <a class="btn" href={p.link.url} target="_blank" rel={p.link.ad ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{p.link.label}{p.link.ad && '(広告)'}</a>
     </div>
   </div>
 </li>
